@@ -94,12 +94,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-<<<<<<< HEAD
-    compileSdkVersion 23
-//    buildToolsVersion "23.0.1"
-=======
     compileSdkVersion 26
->>>>>>> f27070e101373b69802eda68f4a686151f3dfb31
 
     defaultConfig {
         applicationId "com.finder"
