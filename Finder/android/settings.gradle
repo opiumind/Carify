@@ -1,3 +1,11 @@
 rootProject.name = 'Finder'
+include ':react-native-google-api-availability-bridge'
+project(':react-native-google-api-availability-bridge').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-google-api-availability-bridge/android')
+include ':react-native-maps'
+project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
+include ':react-native-maps'
+project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
 
 include ':app'
+include ':react-native-maps'
+project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')

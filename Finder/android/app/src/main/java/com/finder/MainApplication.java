@@ -3,13 +3,16 @@ package com.finder;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.ivanwu.googleapiavailabilitybridge.ReactNativeGooglePlayServicesPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
+import com.airbnb.android.react.maps.MapsPackage;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -22,7 +25,9 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new ReactNativeGooglePlayServicesPackage(),
+            new MapsPackage()
       );
     }
 
@@ -41,5 +46,12 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+  }
+  
+  protected List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new MapsPackage()
+    );
   }
 }
