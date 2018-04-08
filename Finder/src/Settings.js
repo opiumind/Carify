@@ -10,18 +10,40 @@ import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 
 
 class Settings extends Component {
-    state = {text: '20', email: '', clicked: false};
+    state = {text: '20', email: '', clicked: false, sendHospitals: 1};
      renderList() {
+         // const email = [];
+         const settings = {
+             emails: [],
+             sendHospitals: 1,
+             timeOfInactivity: 20
+         };
          if (this.state.clicked) {
+             settings.emails.push(this.state.email);
+             settings.sendHospitals=this.state.sendHospitals;
+             settings.timeOfInactivity=this.state.text;
+             console.warn(settings);
              return (
                  <Text>{this.state.email}</Text>
              )
          }
+
+     }
+     reset() {
+         if (this.state.clicked) {
+             return (
+                <Text>Reset</Text>
+             )
+         }else {
+             return(
+                <Text>Confirm</Text>
+             )
+         }
      }
 
-    onSelect(index, value){
+    onSelect(value){
         this.setState({
-            text1: `Selected index: ${index} , value: ${value}`
+             sendHospitals: value
         })
     }
 
@@ -42,22 +64,21 @@ class Settings extends Component {
                         style={styles.Input}
                         placeholder="Add e-mail address"
                         onChangeText={(email) => this.setState({email})}
+
                     />
-                    <TouchableOpacity onPress={() => this.setState({clicked: true})}>
-                        <Text>Enter</Text>
-                    </TouchableOpacity>
+
                     <Text style={styles.Title}>Send info about hospitals nearby:</Text>
                     <View style={styles.container}>
 
                         <RadioGroup
                             selectedIndex={1}
-                            onSelect = {(index, value) => this.onSelect(index, value)}
+                            onSelect = {(value) => this.onSelect(value)}
                         >
-                            <RadioButton value={'item1'} >
+                            <RadioButton value={true} >
                                 <Text>Yes</Text>
                             </RadioButton>
 
-                            <RadioButton value={'item2'}>
+                            <RadioButton value={false}>
                                 <Text>No</Text>
                             </RadioButton>
                         </RadioGroup>
@@ -70,6 +91,11 @@ class Settings extends Component {
                         placeholder="Change time"
                         onChangeText={(text) => this.setState({text})}
                     />
+                    <TouchableOpacity onPress={() =>
+                        this.setState({clicked: !this.state.clicked})
+                    }>
+                        <Text>{this.reset()}</Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </ImageBackground>
         )
