@@ -5,85 +5,78 @@ import { WideButton } from './components/WideButton';
 // import { RadioButtons } from './components/RadioButtons';
 // import { FlatList } from './components/FlatList';
 // import { RadioButtons } from 'react-native-radio-buttons';
+import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 
 
 
 class Settings extends Component {
-  state = {text: '20'};
-  // emails: [
-  //   {key: 'ovl29@email.vccs.edu'},
-  //   {key: 'gg@gg.dg'
+    state = {text: '20', email: '', clicked: false};
+     renderList() {
+         if (this.state.clicked) {
+             return (
+                 <Text>{this.state.email}</Text>
+             )
+         }
+     }
 
-  // renderList(){
-  //   return(
-  //     data.push(this.state.text)
-  // )
-  // }
-  render() {
-    return (
-      <ImageBackground
-        source={require('../static/images/umbrella-background-white.jpg')}
-        style={styles.backgroundImage}
-      >
-        <View style={styles.Container}>
-          <Text style={styles.Title}>List of alert recipients:</Text>
-
-          <FlatList
-            style={styles.List}
-            data={[{key: 'ovl29@email.vccs.edu'},
-              {key: 'gg@gg.dg'}]}
-            renderItem={({item}) => <Text style={styles.ListText}>{item.key}</Text>}
-          />
-
-          <TextInput
-            style={styles.Input}
-            placeholder="Add e-mail address"
-            onChangeText={(text) => this.setState({text})}
-          />
-
-          <Text style={styles.Title}>Send info about hospitals nearby:</Text>
-          <Text style={styles.Title}>Send alert after inactivity during:</Text>
-          <Text style={styles.ListText}>{this.state.text} mins</Text>
-          <TextInput
-            style={styles.Input}
-            placeholder="Change time"
-            onChangeText={(text) => this.setState({text})}
-          />
+    onSelect(index, value){
+        this.setState({
+            text1: `Selected index: ${index} , value: ${value}`
+        })
+    }
 
 
-          {/*<RadioButtons/>*/}
+    render() {
+        return (
+            <ImageBackground
+                source={require('../static/images/umbrella-background-white.jpg')}
+                style={styles.backgroundImage}
+            >
+                <View style={styles.Container}>
+                    <Text style={styles.Title}>List of alert recipients:</Text>
 
-          {/*<Text style={{padding: 10, fontSize: 42}}>*/}
-          {/*{this.state.text.split(' ').map((word) => word && '🍕').join(' ')}*/}
-          {/*</Text>*/}
-        </View>
-      </ImageBackground>
-    );
+                    <Text>ovl29@email.vccs.edu</Text>
+                    <Text>pht200@email.vccs.edu</Text>
+                    {this.renderList()}
+                    <TextInput
+                        style={styles.Input}
+                        placeholder="Add e-mail address"
+                        onChangeText={(email) => this.setState({email})}
+                    />
+                    <TouchableOpacity onPress={() => this.setState({clicked: true})}>
+                        <Text>Enter</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.Title}>Send info about hospitals nearby:</Text>
+                    <View style={styles.container}>
 
-  }
+                        <RadioGroup
+                            onSelect = {(index, value) => this.onSelect(index, value)}
+                        >
+                            <RadioButton value={'item1'} >
+                                <Text>Marymount Hospital</Text>
+                            </RadioButton>
 
+                            <RadioButton value={'item2'}>
+                                <Text>George Town</Text>
+                            </RadioButton>
+                        </RadioGroup>
 
-//   render() {
-//     return (
-//       <View style={{padding: 10}}>
-//         <TextInput
-//           style={{height: 40}}
-//           placeholder="Type here to translate!"
-//           onChangeText={(text) => this.setState({text})}
-//         />
-//         <Text style={{padding: 10, fontSize: 42}}>
-//           {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
-//         </Text>
-//       </View>
-//     );
-//   }
-// }
+                        <Text style={styles.text}>{this.state.text1}</Text>
 
-// skip this line if using Create React Native App
-// AppRegistry.registerComponent('AwesomeProject', () => PizzaTranslator);
+                    </View>
+                    <Text style={styles.Title}>Send alert after inactivity during:</Text>
+                    <Text style={styles.ListText}>{this.state.text} mins</Text>
+                    <TextInput
+                        style={styles.Input}
+                        placeholder="Change time"
+                        onChangeText={(text) => this.setState({text})}
+                    />
+                </View>
+            </ImageBackground>
+        )
+    }
 }
-
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     backgroundImage: {
       flex: 1,
       width: null,

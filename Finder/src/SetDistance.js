@@ -8,9 +8,11 @@ export default class SetDistance extends React.Component {
             <View style={styles.BigContainer}>
               <Text style={styles.Title}>List of locations:</Text>
               <FlatList
-                style={styles.List}
                 data={[{key: {address: '5848 Reservoir ave, Falls Church, VA', distance: '2'}}]}
-                renderItem={({item}) => <View><Text style={styles.ListText}>{item.key.address}</Text>     <Text style={styles.ListText}>{item.key.distance}</Text> miles</View>}
+                renderItem={({item}) =>
+                    <View><Text style={styles.ListText}>{item.key.address}</Text>
+                        <Text style={styles.ListText}>{item.key.distance}</Text> miles
+                    </View>}
               />
 
                 <View style={styles.SmallContainer}>
