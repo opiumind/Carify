@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 export default class SetDistance extends React.Component {
-  state = {answer: {}, locations: '', distance: 2};
+  state = {answer: {}, locations: '', distance: 2, period: 10};
   getLocation(location) {
       console.warn(location);
       let addressUrl = location.split(' ').join('+');
@@ -36,6 +36,11 @@ export default class SetDistance extends React.Component {
                     style={styles.Input}
                     placeholder="Add distance"
                     onChangeText={(distance) => {this.setState({distance: distance})}}
+                  />
+                  <TextInput
+                      style={styles.Input}
+                      placeholder="Period in minutes"
+                      onChangeText={(period) => {this.setState({period: period})}}
                   />
                 {/*</View>*/}
                 <TouchableOpacity onPress={() => {this.getLocation(this.state.locations)}}>

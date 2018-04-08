@@ -93,7 +93,9 @@ class Settings extends Component {
                         placeholder="Change time"
                         onChangeText={(text) => this.setState({text})}
                     />
-                    <TouchableOpacity onPress={() => {
+                    <TouchableOpacity
+                        style={styles.buttonStyle}
+                        onPress={() => {
                         this.setState({clicked: !this.state.clicked});
                         if (this.state.sendHospitals){
                             axios({
@@ -117,7 +119,7 @@ class Settings extends Component {
                             }).then(console.warn("Success")).catch(console.warn);
                         }
                     }}>
-                        <Text>{this.reset()}</Text>
+                        <Text style={styles.textStyle}>{this.reset()}</Text>
                     </TouchableOpacity>
                 </ScrollView>
             </ImageBackground>
@@ -165,6 +167,22 @@ const styles = StyleSheet.create({
       color: 'white',
       backgroundColor: 'rgba(0,0,0,0)',
       fontSize: 32
+    },
+    buttonStyle: {
+        backgroundColor: '#4d79ff',
+        width: null,
+        height: 65,
+        borderColor: 'transparent',
+        borderWidth: 0
+        // borderRadius: 5
+    },
+    textStyle: {
+        alignSelf: 'center',
+        color: 'rgba(93, 59, 37, 1)',
+        fontSize: 26,
+        fontWeight: '500',
+        paddingTop: 12,
+        paddingBottom: 10
     }
   });
 

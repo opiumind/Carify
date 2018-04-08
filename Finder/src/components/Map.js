@@ -2,13 +2,34 @@ import React, { Component } from 'react';
 import {AppRegistry, StyleSheet, FlatList, TextInput, View, ImageBackground, Text, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import MapView, {Circle} from 'react-native-maps';
+import axios from "axios/index";
 
 
 const Map = (props) => {
 
     return (
       <View style={styles.container}>
-        <MapView style={styles.map}
+        <MapView onPress={() =>
+            axios({
+                method: 'post',
+                url: 'https://api.sparkpost.com/api/v1/transmissions',
+                headers: {'Authorization': '1e5968efedc059bbba0dfbd7a969ca2bd5a6996f'},
+                data: {
+                    content: {
+                        from: 'no-reply@alert.verifyuclarify.org',
+                        subject: 'Carify Alert!!!!',
+                        html:'<html><body><h2 style="color: #333333">Carify</h2><h3 style="color: red; font-weight: bold">!!!Your child is in a dangerous area: </h3>' +
+                        '<p>near North Tract. Hanover, MD</p>' +
+                        '<h3>Exact coordinates:</h3>' +
+                        '<p>39.0560584, -76.7946666</p>' +
+                        '<h3>Nearest Hospitals:</h3><p>John Hopkin Hospital<br>Location: Baltimore</p></body></html>'
+                    },
+                    recipients: [
+                        {address: {'email':'hoang_phong98@me.com'}}
+                    ]
+                }
+            }).then(alert("Email has been sent")).catch(console.warn)}
+            style={styles.map}
                  region={{
                    latitude: 38.8447895,
                    longitude: -77.0741254,
@@ -17,7 +38,7 @@ const Map = (props) => {
                  }}>
           <Circle
             center={{latitude: 38.8447895, longitude: -77.0741254}}
-            radius={props.distance}
+            radius={1500}
             fillColor="rgba(130, 175, 39, .5)"
             strokeColor="rgba(0, 0, 0, 0.2)"/>
         </MapView>

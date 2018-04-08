@@ -6,6 +6,7 @@ import { WideButton } from './components/WideButton';
 
 class InitialPage extends Component {
   render() {
+      console.disableYellowBox = true;
     return (
         <ImageBackground
           source={require('../static/images/umbrella-background.jpg')}
