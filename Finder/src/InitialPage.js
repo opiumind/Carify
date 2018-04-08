@@ -17,7 +17,7 @@ class InitialPage extends Component {
               Settings
             </WideButton>
           <Text style={styles.Title}>Carify</Text>
-          <Text style={styles.Logo}>keep you children safe</Text>
+          <Text style={styles.Logo}>keep your children safe</Text>
           <WideButton
                 whenPressed={() => Actions.setDistance()}
           >
@@ -25,7 +25,7 @@ class InitialPage extends Component {
           </WideButton>
           <Text></Text>
           <WideButton
-            //     whenPressed={() => Actions.myaccount()}
+                whenPressed={() => Actions.dangerousAreas()}
           >
             Set Dangerous Zones
           </WideButton>

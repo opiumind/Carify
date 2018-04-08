@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AppRegistry, StyleSheet, FlatList, TextInput, View, ImageBackground, Text, TouchableOpacity} from 'react-native';
+import {AppRegistry, StyleSheet, FlatList, TextInput, View, ImageBackground, Text, TouchableOpacity, ScrollView} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { WideButton } from './components/WideButton';
 // import { RadioButtons } from './components/RadioButtons';
@@ -32,7 +32,7 @@ class Settings extends Component {
                 source={require('../static/images/umbrella-background-white.jpg')}
                 style={styles.backgroundImage}
             >
-                <View style={styles.Container}>
+                <ScrollView style={styles.Container}>
                     <Text style={styles.Title}>List of alert recipients:</Text>
 
                     <Text>ovl29@email.vccs.edu</Text>
@@ -50,18 +50,17 @@ class Settings extends Component {
                     <View style={styles.container}>
 
                         <RadioGroup
+                            selectedIndex={1}
                             onSelect = {(index, value) => this.onSelect(index, value)}
                         >
                             <RadioButton value={'item1'} >
-                                <Text>Marymount Hospital</Text>
+                                <Text>Yes</Text>
                             </RadioButton>
 
                             <RadioButton value={'item2'}>
-                                <Text>George Town</Text>
+                                <Text>No</Text>
                             </RadioButton>
                         </RadioGroup>
-
-                        <Text style={styles.text}>{this.state.text1}</Text>
 
                     </View>
                     <Text style={styles.Title}>Send alert after inactivity during:</Text>
@@ -71,7 +70,7 @@ class Settings extends Component {
                         placeholder="Change time"
                         onChangeText={(text) => this.setState({text})}
                     />
-                </View>
+                </ScrollView>
             </ImageBackground>
         )
     }
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
     Container: {
       paddingLeft: 30,
       paddingRight: 30,
-      paddingBottom: 20,
+      paddingBottom: 40,
       paddingTop: 20
     },
 
