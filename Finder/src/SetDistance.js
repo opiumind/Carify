@@ -20,19 +20,24 @@ export default class SetDistance extends React.Component {
             <View style={styles.BigContainer}>
               <View style={styles.SmallContainer}>
                 <Text style={styles.Title}>List of locations:</Text>
-                <Text style={styles.ListText}>3000 Dawes Ave, Alexandria, VA</Text>
+                {/*<View style={{flex: 2}}>*/}
+                  <Text style={styles.ListText}>3000 Dawes Ave, Alexandria, VA</Text>
+                  <Text style={styles.ListText} style={{fontColor: "rgba(0,0,0,0.5)"}}>2 miles</Text>
+                {/*</View>*/}
+                {/*<View style={{flex: 2}}>*/}
+                {/*<View style={{flex: 1,justifyContent: 'flex-start', flexDirection: 'row',alignItems: 'center'}}>*/}
+
                 <TextInput
-                  style={styles.Input}
-                  placeholder="Add location"
-                  // onChange={location => {this.setState({query: event.target.value})}}
-                  //       onKeyPress={event => {
-                  //         if (event.key === 'Enter') {
-                  //           this.setState({locations: location});
-                  //         }
-                  //       }}
-                  // onBlur={(location) => {this.getLocation(location);this.setState({locations: location})}}
-                  onChangeText={(location) => {this.setState({locations: location})}}
-                />
+                    style={styles.Input}
+                    placeholder="Add location"
+                    onChangeText={(location) => {this.setState({locations: location})}}
+                  />
+                  <TextInput
+                    style={styles.Input}
+                    placeholder="Add distance"
+                    onChangeText={(distance) => {this.setState({distance: distance})}}
+                  />
+                {/*</View>*/}
                 <TouchableOpacity onPress={() => {this.getLocation(this.state.locations)}}>
                   <Text>Enter</Text>
                 </TouchableOpacity>
@@ -42,7 +47,8 @@ export default class SetDistance extends React.Component {
                 {/*2730+s+veitch+st+arlington+va*/}
 
               </View>
-              <Map/>
+              <Map distance={this.state.distance}
+                   location={this.state.answer}/>
             </View>
         )
     }
@@ -68,6 +74,20 @@ const styles = StyleSheet.create({
       // textShadowOffset: {width: -1, height: 1},
       // textShadowRadius: 30
     },
+
+  Input: {
+    fontSize: 18,
+    // width: 100,
+    // height: 20
+    // borderWidth: 1,
+    // borderColor: 'rgba(60, 63, 65, .9)',
+    // borderRadius: 4
+  },
+
+  ListText: {
+    fontSize: 18,
+    paddingLeft: 5
+  },
 
     SmallContainer: {
       paddingLeft: 30,
