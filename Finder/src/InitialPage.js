@@ -11,14 +11,24 @@ class InitialPage extends Component {
           source={require('../static/images/umbrella-background.jpg')}
           style={styles.backgroundImage}
         >
-          <Text>Smile!</Text>
-
              <WideButton
-          //     whenPressed={() => Actions.myaccount()}
+              whenPressed={() => Actions.settings()}
             >
-              My Account
+              Settings
             </WideButton>
-          <Text style={styles.Title}>CharitalOne</Text>
+          <Text style={styles.Title}>Carify</Text>
+          <Text style={styles.Logo}>keep you children safe</Text>
+          <WideButton
+                whenPressed={() => Actions.setDistance()}
+          >
+            Set Distance
+          </WideButton>
+          <Text></Text>
+          <WideButton
+            //     whenPressed={() => Actions.myaccount()}
+          >
+            Set Dangerous Zones
+          </WideButton>
         </ImageBackground>
     );
   }
@@ -32,14 +42,25 @@ const styles = StyleSheet.create({
   },
 
   Title: {
-    fontSize: 46,
+    fontSize: 66,
     fontWeight: '500',
     paddingTop: 60,
     textAlign: 'center',
-    color: 'rgba(230, 145, 83, 1)',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    color: 'rgba(130, 175, 37, 1)',
+    textShadowColor: 'rgba(21, 48, 0, .8)',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 30
+  },
+
+  Logo: {
+    textAlign: 'center',
+    color: 'white',
+    paddingBottom: 60,
+    textShadowColor: 'rgba(21, 48, 0, .9)',
+    textShadowOffset: {width: 0, height: 1},
+    textShadowRadius: 20,
+    // backgroundColor: 'rgba(255,255,255,1)',
+    fontSize: 22
   },
 
   text: {

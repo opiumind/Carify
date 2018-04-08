@@ -12,7 +12,7 @@ const WideButton = ({ whenPressed, children }) => {
 
 const styles = {
     buttonStyle: {
-      backgroundColor: 'rgba(230, 145, 83, .8)',
+      backgroundColor: 'rgba(255, 251, 190, .8)',
       width: null,
       height: 65,
       borderColor: 'transparent',
@@ -21,7 +21,7 @@ const styles = {
     },
     textStyle: {
         alignSelf: 'center',
-        color: 'rgba(245, 239, 232, 1)',
+        color: 'rgba(93, 59, 37, 1)',
         fontSize: 26,
         fontWeight: '500',
         paddingTop: 12,
