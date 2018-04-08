@@ -1,21 +1,27 @@
 import React from 'react';
 import { Router, Scene } from 'react-native-router-flux';
-import Map from './Map'
+import SetDistance from './SetDistance'
 import {InitialPage} from './InitialPage'
-import SendEmail from './SendEmail'
+
+import Settings from './Settings'
+
 
 const App = () => {
     return (
     <Router showNavigationBar={false}>
         <Scene key={"root"}>
             <Scene  key={"initial"}
-                    component={SendEmail}
+                    component={InitialPage}
                     hideNavBar={true}
                     initial/>
-          <Scene  key={"map"}
-                  component={Map}
-                  hideNavBar={false}
-                  />
+            <Scene  key={"setDistance"}
+                    component={SetDistance}
+                    hideNavBar={false}
+                    />
+            <Scene  key={"settings"}
+                    component={Settings}
+                    hideNavBar={false}
+            />
         </Scene>
     </Router>
     )
