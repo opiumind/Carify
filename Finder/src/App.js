@@ -2,8 +2,10 @@ import React from 'react';
 import { Router, Scene } from 'react-native-router-flux';
 import SetDistance from './SetDistance'
 import {InitialPage} from './InitialPage'
+
 import Settings from './Settings'
 import DangerousAreas from "./DangerousAreas";
+
 
 const App = () => {
     return (
