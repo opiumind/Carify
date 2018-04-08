@@ -11,7 +11,7 @@ export default class SetDistance extends React.Component {
                 data={[{key: {address: '5848 Reservoir ave, Falls Church, VA', distance: '2'}}]}
                 renderItem={({item}) =>
                     <View><Text style={styles.ListText}>{item.key.address}</Text>
-                        <Text style={styles.ListText}>{item.key.distance}</Text> miles
+                        <Text style={styles.ListText}>{item.key.distance} miles</Text>
                     </View>}
               />
 
