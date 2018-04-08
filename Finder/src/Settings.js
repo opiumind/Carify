@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {AppRegistry, StyleSheet, FlatList, TextInput, View, ImageBackground, Text, TouchableOpacity} from 'react-native';
+import {AppRegistry, StyleSheet, FlatList, TextInput, View, ImageBackground, Text, TouchableOpacity, ScrollView} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { WideButton } from './components/WideButton';
 // import { RadioButtons } from './components/RadioButtons';
@@ -10,18 +10,40 @@ import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 
 
 class Settings extends Component {
-     state = {text: '20', email: '', clicked: false};
+    state = {text: '20', email: '', clicked: false, sendHospitals: 1};
      renderList() {
+         // const email = [];
+         const settings = {
+             emails: [],
+             sendHospitals: 1,
+             timeOfInactivity: 20
+         };
          if (this.state.clicked) {
+             settings.emails.push(this.state.email);
+             settings.sendHospitals=this.state.sendHospitals;
+             settings.timeOfInactivity=this.state.text;
+             console.warn(settings);
              return (
                  <Text>{this.state.email}</Text>
              )
          }
+
+     }
+     reset() {
+         if (this.state.clicked) {
+             return (
+                <Text>Reset</Text>
+             )
+         }else {
+             return(
+                <Text>Confirm</Text>
+             )
+         }
      }
 
-    onSelect(index, value){
+    onSelect(value){
         this.setState({
-            text1: `Selected index: ${index} , value: ${value}`
+             sendHospitals: value
         })
     }
 
@@ -32,7 +54,7 @@ class Settings extends Component {
                 source={require('../static/images/umbrella-background-white.jpg')}
                 style={styles.backgroundImage}
             >
-                <View style={styles.Container}>
+                <ScrollView style={styles.Container}>
                     <Text style={styles.Title}>List of alert recipients:</Text>
 
                     <Text>ovl29@email.vccs.edu</Text>
@@ -42,26 +64,24 @@ class Settings extends Component {
                         style={styles.Input}
                         placeholder="Add e-mail address"
                         onChangeText={(email) => this.setState({email})}
+
                     />
-                    <TouchableOpacity onPress={() => this.setState({clicked: true})}>
-                        <Text>Enter</Text>
-                    </TouchableOpacity>
+
                     <Text style={styles.Title}>Send info about hospitals nearby:</Text>
                     <View style={styles.container}>
 
                         <RadioGroup
-                            onSelect = {(index, value) => this.onSelect(index, value)}
+                            selectedIndex={1}
+                            onSelect = {(value) => this.onSelect(value)}
                         >
-                            <RadioButton value={'item1'} >
-                                <Text>Marymount Hospital</Text>
+                            <RadioButton value={true} >
+                                <Text>Yes</Text>
                             </RadioButton>
 
-                            <RadioButton value={'item2'}>
-                                <Text>George Town</Text>
+                            <RadioButton value={false}>
+                                <Text>No</Text>
                             </RadioButton>
                         </RadioGroup>
-
-                        <Text style={styles.text}>{this.state.text1}</Text>
 
                     </View>
                     <Text style={styles.Title}>Send alert after inactivity during:</Text>
@@ -71,7 +91,12 @@ class Settings extends Component {
                         placeholder="Change time"
                         onChangeText={(text) => this.setState({text})}
                     />
-                </View>
+                    <TouchableOpacity onPress={() =>
+                        this.setState({clicked: !this.state.clicked})
+                    }>
+                        <Text>{this.reset()}</Text>
+                    </TouchableOpacity>
+                </ScrollView>
             </ImageBackground>
         )
     }
@@ -86,7 +111,7 @@ const styles = StyleSheet.create({
     Container: {
       paddingLeft: 30,
       paddingRight: 30,
-      paddingBottom: 20,
+      paddingBottom: 40,
       paddingTop: 20
     },
 
