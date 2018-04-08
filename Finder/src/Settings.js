@@ -10,7 +10,7 @@ import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 
 
 class Settings extends Component {
-    state = {text: '20', email: '', clicked: false};
+     state = {text: '20', email: '', clicked: false};
      renderList() {
          if (this.state.clicked) {
              return (
