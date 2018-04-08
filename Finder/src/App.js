@@ -4,6 +4,7 @@ import SetDistance from './SetDistance'
 import {InitialPage} from './InitialPage'
 
 import Settings from './Settings'
+import DangerousAreas from "./DangerousAreas";
 
 
 const App = () => {
@@ -20,6 +21,10 @@ const App = () => {
                     />
             <Scene  key={"settings"}
                     component={Settings}
+                    hideNavBar={false}
+            />
+            <Scene  key={"dangerousAreas"}
+                    component={DangerousAreas}
                     hideNavBar={false}
             />
         </Scene>

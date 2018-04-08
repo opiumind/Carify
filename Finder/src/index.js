@@ -1,6 +1,8 @@
 // export * from './Info';
 export * from './InitialPage';
 export * from './Settings';
+export * from './DangerousAreas';
+export * from './SetDistance';
 // export * from './components/RadioButtons';
 // export * from './components/FlatList';
 // export * from './MyAccount';
