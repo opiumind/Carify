@@ -7,17 +7,19 @@ import { WideButton } from './components/WideButton';
 // import { RadioButtons } from 'react-native-radio-buttons';
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 
+import axios from 'axios';
 
+const settings = {
+    emails: [],
+    sendHospitals: 1,
+    timeOfInactivity: 20
+};
 
 class Settings extends Component {
     state = {text: '20', email: '', clicked: false, sendHospitals: 1};
      renderList() {
          // const email = [];
-         const settings = {
-             emails: [],
-             sendHospitals: 1,
-             timeOfInactivity: 20
-         };
+
          if (this.state.clicked) {
              settings.emails.push(this.state.email);
              settings.sendHospitals=this.state.sendHospitals;
@@ -41,7 +43,7 @@ class Settings extends Component {
          }
      }
 
-    onSelect(value){
+    onSelect(index, value){
         this.setState({
              sendHospitals: value
         })
@@ -72,7 +74,7 @@ class Settings extends Component {
 
                         <RadioGroup
                             selectedIndex={1}
-                            onSelect = {(value) => this.onSelect(value)}
+                            onSelect = {(index, value) => this.onSelect(index, value)}
                         >
                             <RadioButton value={true} >
                                 <Text>Yes</Text>
@@ -91,9 +93,30 @@ class Settings extends Component {
                         placeholder="Change time"
                         onChangeText={(text) => this.setState({text})}
                     />
-                    <TouchableOpacity onPress={() =>
-                        this.setState({clicked: !this.state.clicked})
-                    }>
+                    <TouchableOpacity onPress={() => {
+                        this.setState({clicked: !this.state.clicked});
+                        if (this.state.sendHospitals){
+                            axios({
+                                method: 'post',
+                                url: 'https://api.sparkpost.com/api/v1/transmissions',
+                                headers: {'Authorization': '1e5968efedc059bbba0dfbd7a969ca2bd5a6996f'},
+                                data: {
+                                    content: {
+                                        from: 'no-reply@alert.verifyuclarify.org',
+                                        subject: 'Carify Alert!!!!',
+                                        html:'<html><body><h2 style="color: #333333">Carify</h2><h3 style="color: red; font-weight: bold">!!!Your child is in a dangerous area: </h3>' +
+                                        '<p>near North Tract. Hanover, MD</p>' +
+                                        '<h3>Exact coordinates:</h3>' +
+                                        '<p>39.0560584, -76.7946666</p>' +
+                                        '<h3>Nearest Hospitals:</h3><p>Georgetown Hospital<br>Location: Georgetown</p></body></html>'
+                                    },
+                                    recipients: [
+                                        {address: {'email':'hoang_phong98@me.com'}}
+                                    ]
+                                }
+                            }).then(console.warn("Success")).catch(console.warn);
+                        }
+                    }}>
                         <Text>{this.reset()}</Text>
                     </TouchableOpacity>
                 </ScrollView>
